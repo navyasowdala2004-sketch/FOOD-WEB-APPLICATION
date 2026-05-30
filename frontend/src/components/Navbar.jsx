@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+function Navbar (){
   return (
     <nav className="navbar">
-      <h2>Foodie</h2>
+      <h2>🍔 Foodhub</h2>
 
-      <div>
+      <div className="nav-links">
         <Link to="/">Home</Link>
         <Link to="/menu">Menu</Link>
+         <Link to="/offers">Offers</Link>
         <Link to="/cart">Cart</Link>
         <Link to="/orders">Orders</Link>
         <Link to="/login">Login</Link>

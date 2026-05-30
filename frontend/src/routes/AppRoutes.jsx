@@ -14,7 +14,7 @@ import AddFood from "../pages/AddFood";
 import PaymentSuccess from "../pages/PaymentSuccess";
 import NotFound from "../pages/NotFound";
 
-const AppRoutes = () => {
+function AppRoutes()  {
   return (
     <Routes>
       <Route path="/" element={<Home />} />

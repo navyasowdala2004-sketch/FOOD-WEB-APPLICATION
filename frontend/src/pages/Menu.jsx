@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import FoodCard from "../components/FoodCard";
+import Navbar from "../components/Navbar";
 
 function Menu() {
 
@@ -46,9 +47,7 @@ function Menu() {
 
     <div className="menu-container">
 
-      <h1 className="menu-title">
-        Food Menu
-      </h1>
+      <h1 className="menu-title">Food Menu </h1>
 
       {loading ? (
 

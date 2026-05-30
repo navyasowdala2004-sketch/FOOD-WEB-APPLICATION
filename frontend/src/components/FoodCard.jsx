@@ -21,6 +21,8 @@ function FoodCard({ food }) {
 
         <h4>₹{food.price}</h4>
 
+        <img src={food.foodImage} alt="" />
+
         <button
           onClick={() => addToCart(food)}
         >
