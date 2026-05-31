@@ -4,11 +4,12 @@ const router = express.Router();
 
 const {
   addFood,
-  getFoods
+  getFoods,
+  deleteFood
 } = require("../controllers/foodController");
 
 router.post(
-  "/add", 
+  "/", 
   addFood
 );
 
@@ -17,6 +18,13 @@ router.get(
   "/", 
   getFoods
 );
+
+
+router.delete(
+  "/:id", 
+  deleteFood
+);
+
 
 
 module.exports = router;

@@ -48,10 +48,39 @@ const getFoods = async (
 
 };
 
+const deleteFood = async (req, res) => {
+
+  try {
+
+    const food = await Food.findByIdAndDelete(
+      req.params.id
+    );
+
+    if (!food) {
+      return res.status(404).json({
+        message: "Food not found"
+      });
+    }
+
+    res.json({
+      message: "Food deleted successfully"
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      message: error.message
+    });
+
+  }
+
+};
+
 
 module.exports = {
 
   addFood,
-  getFoods
+  getFoods,
+  deleteFood
 
 };
