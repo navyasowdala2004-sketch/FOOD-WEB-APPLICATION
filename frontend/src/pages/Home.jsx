@@ -1,10 +1,15 @@
 
 import SearchBar from "../components/SearchBar";
 import banner from "../assets/food-banner.jpg";
+import FoodCard from "../components/FoodCard";
 
 function Home() {
   return (
     <>
+      const [foods, setFoods] = useState([]);
+
+    const [searchTerm, setSearchTerm] =
+    useState("");
       
 
       <div
