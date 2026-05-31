@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import { registerUser } from "../services/authService";
 
 const Register = () => {
 
@@ -16,27 +16,23 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    e.preventDefault();
+  try {
+    await registerUser(formData);
 
-    try {
+    alert("Registration Successful");
 
-      await axios.post(
-        "http://localhost:5000/api/auth/register",
-        formData
-      );
+  } catch (error) {
+    console.log(error);
 
-      alert("Registration Success");
-
-    } catch (error) {
-      console.log(error);
-       alert(
-        error.response?.data?.message ||
-          "Registration Failed"
-       );
-    }
-  };
+    alert(
+      error.response?.data?.message ||
+      "Registration Failed"
+    );
+  }
+};
 
   return (
     <div className="auth-container">

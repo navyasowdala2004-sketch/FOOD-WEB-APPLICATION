@@ -11,6 +11,8 @@ import Orders from "../pages/Orders";
 import Profile from "../pages/Profile";
 import AdminDashboard from "../pages/AdminDashboard";
 import AddFood from "../pages/AddFood";
+import ManageOrders from "../pages/ManageOrders";
+import ManageUsers from "../pages/ManageUsers";
 import PaymentSuccess from "../pages/PaymentSuccess";
 import NotFound from "../pages/NotFound";
 
@@ -30,6 +32,8 @@ function AppRoutes()  {
       <Route path="/profile" element={<Profile />} />
       <Route path="/admin" element={<AdminDashboard />} />
       <Route path="/add-food" element={<AddFood />} />
+      <Route path="/admin/orders"element={<ManageOrders />}/>
+      <Route path="/admin/users"element={<ManageUsers />}/>
       <Route path="/success" element={<PaymentSuccess />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

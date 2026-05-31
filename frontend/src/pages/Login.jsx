@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import { loginUser } from "../services/authService";
 
 
 const Login = () => {
@@ -16,28 +16,28 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    try {
+  try {
+    const res = await loginUser(formData);
 
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        formData
-      );
+    localStorage.setItem(
+      "token",
+      res.data.token
+    );
 
-      localStorage.setItem("token", res.data.token);
+    alert("Login Success");
 
-      alert("Login Success");
+  } catch (error) {
+    console.log(error);
 
-    } catch (error) {
-      console.log(error);
-       alert(
-        error.response?.data?.message ||
-          "Login Failed"
-       );
-    }
-  };
+    alert(
+      error.response?.data?.message ||
+      "Login Failed"
+    );
+  }
+};
 
   return (
     <div className="auth-container">

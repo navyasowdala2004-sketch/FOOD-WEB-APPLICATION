@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-import axios from "axios";
 
+import { getFoods } from "../services/foodService";
 import FoodCard from "../components/FoodCard";
-import Navbar from "../components/Navbar";
+
 
 function Menu() {
 
@@ -20,28 +20,16 @@ function Menu() {
   }, []);
 
   const fetchFoods = async () => {
+  try {
+    const res = await getFoods();
 
-    try {
-
-      const res = await axios.get(
-        "https://online-food-app-zn4y.onrender.com/api/foods"
-      );
-
-      console.log(res.data);
-
-      setFoods(res.data);
-
-    } catch (error) {
-
-      console.log(error);
-
-    } finally {
-
-      setLoading(false);
-
-    }
-
-  };
+    setFoods(res.data);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
 
