@@ -13,6 +13,7 @@ import AdminDashboard from "../pages/AdminDashboard";
 import AddFood from "../pages/AddFood";
 import ManageOrders from "../pages/ManageOrders";
 import ManageUsers from "../pages/ManageUsers";
+import Payment from "../pages/Payment";
 import PaymentSuccess from "../pages/PaymentSuccess";
 import NotFound from "../pages/NotFound";
 
@@ -25,8 +26,6 @@ function AppRoutes()  {
       <Route path="/menu" element={<Menu />} />
       <Route path="/food/:id" element={<FoodDetails />} />
       <Route path="/cart" element={<Cart />} />
-      <Route path="/login"element={<Login />} />
-       <Route path="/register"element={<Register />}/>
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/orders" element={<Orders />} />
       <Route path="/profile" element={<Profile />} />
@@ -34,10 +33,15 @@ function AppRoutes()  {
       <Route path="/add-food" element={<AddFood />} />
       <Route path="/admin/orders"element={<ManageOrders />}/>
       <Route path="/admin/users"element={<ManageUsers />}/>
-      <Route path="/success" element={<PaymentSuccess />} />
+      <Route path="/payment" element={<Payment />} />
+      <Route path="/payment-success" element={<PaymentSuccess />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
-};
+
+  
+
+}
+
 
 export default AppRoutes;

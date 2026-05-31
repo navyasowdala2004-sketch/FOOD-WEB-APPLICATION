@@ -29,13 +29,30 @@ function Orders() {
               className="order-card"
             >
               <h3>
-                Order #
-                {index + 1}
+                Order #{index + 1}
               </h3>
 
               <p>
                 Total: ₹
                 {order.total}
+              </p>
+
+              <p>
+                Payment Method:
+                {" "}
+                {order.paymentMethod}
+              </p>
+
+              <p>
+                Payment Status:
+                {" "}
+                {order.paymentStatus}
+              </p>
+
+              <p>
+                Order Date:
+                {" "}
+                {order.date}
               </p>
 
               <p>

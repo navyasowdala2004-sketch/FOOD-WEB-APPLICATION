@@ -3,38 +3,35 @@ const express = require("express");
 const router = express.Router();
 
 const {
-
   placeOrder,
   getMyOrders,
   trackOrder,
   cancelOrder
-
 } = require("../controllers/orderController");
 
-const authMiddleware = require("../middleware/authMiddleware");
-
+const protect = require("../middleware/authMiddleware");
 
 router.post(
   "/place",
-  authMiddleware,
+  protect,
   placeOrder
 );
 
 router.get(
   "/myorders",
-  authMiddleware,
+  protect,
   getMyOrders
 );
 
 router.get(
   "/track/:id",
-  authMiddleware,
+  protect,
   trackOrder
 );
 
 router.put(
   "/cancel/:id",
-  authMiddleware,
+  protect,
   cancelOrder
 );
 
