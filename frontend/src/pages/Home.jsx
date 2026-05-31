@@ -8,9 +8,9 @@ function Home() {
     <>
       const [foods, setFoods] = useState([]);
 
-    const [searchTerm, setSearchTerm] =
-    useState("");
+    const [searchTerm, setSearchTerm] = useState("");
       
+  
 
       <div
         className="hero"
