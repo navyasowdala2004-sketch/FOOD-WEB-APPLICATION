@@ -13,10 +13,10 @@ function Navbar() {
   useEffect(() => {
     checkLogin();
 
-    // custom event listener (FIXED)
     window.addEventListener("authChange", checkLogin);
 
-    return () => window.removeEventListener("authChange", checkLogin);
+    return () =>
+      window.removeEventListener("authChange", checkLogin);
   }, []);
 
   const handleLogout = () => {
@@ -38,15 +38,19 @@ function Navbar() {
         <Link to="/offers">Offers</Link>
         <Link to="/cart">Cart</Link>
 
+        {/* AUTH SECTION */}
         {!isLoggedIn ? (
           <>
             <Link to="/login">Login</Link>
             <Link to="/register">Register</Link>
           </>
         ) : (
-          <button className="logout-btn" onClick={handleLogout}>
-            Logout
-          </button>
+          <>
+            <Link to="/profile">Profile</Link>
+            <button className="logout-btn" onClick={handleLogout}>
+              Logout
+            </button>
+          </>
         )}
       </div>
     </nav>
