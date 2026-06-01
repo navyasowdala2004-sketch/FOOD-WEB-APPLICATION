@@ -22,7 +22,7 @@ connectDB();
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://online-food-app-zn4y.onrender.com"
+    "https://online-food-app-xfcf.vercel.app"
   ],
   credentials: true
 }
