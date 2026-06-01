@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../services/authService";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -16,31 +17,24 @@ const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
-
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        formData
-      );
+  try {
+    const res = await loginUser(formData);
 
-      localStorage.setItem("token", res.data.token);
+    localStorage.setItem("token", res.data.token);
 
-      alert("Login Success");
+    alert("Login Success");
 
-      // update navbar instantly
-      window.dispatchEvent(new Event("authChange"));
+    window.dispatchEvent(new Event("authChange"));
 
-      // redirect
-      navigate("/");
-
-    } catch (error) {
-      console.log(error);
-      alert("Login Failed");
-    }
-  };
+    navigate("/");
+  } catch (error) {
+    console.log(error);
+    alert(error.response?.data?.message || "Login Failed");
+  }
+};
 
   return (
     <div className="auth-container">
