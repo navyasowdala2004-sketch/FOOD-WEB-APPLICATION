@@ -12,7 +12,7 @@ export const FoodProvider = ({ children }) => {
   // fetch foods once
   const fetchFoods = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/foods");
+      const res = await axios.get("https://online-food-app-zn4y.onrender.com/api/foods");
       setFoods(res.data);
     } catch (error) {
       console.log("Food fetch error:", error);
