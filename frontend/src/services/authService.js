@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/auth";
+const API = import.meta.env.VITE_API_URL;
 
 // Register User
 export const registerUser = (userData) => {
   return axios.post(
-    `${API_URL}/register`,
+    `${API}/auth/register`,
     userData
   );
 };
@@ -13,7 +13,7 @@ export const registerUser = (userData) => {
 // Login User
 export const loginUser = (userData) => {
   return axios.post(
-    `${API_URL}/login`,
+    `${API}/auth/login`,
     userData
   );
 };

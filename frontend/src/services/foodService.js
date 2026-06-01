@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const API_URL =
-  "https://online-food-app-zn4y.onrender.com/api/foods";
+
+const API = import.meta.env.VITE_API_URL;
 
 export const getFoods = () => {
-  return axios.get(API_URL);
+  return axios.get(`${API}/foods`);
 };
