@@ -2,7 +2,6 @@ import { useState } from "react";
 import { registerUser } from "../services/authService";
 
 const Register = () => {
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,39 +15,31 @@ const Register = () => {
     });
   };
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  try {
-    await registerUser(formData);
+    try {
+      await registerUser(formData);
 
-    alert("Registration Successful");
+      alert("Registration Successful");
 
-  } catch (error) {
-    console.log(error);
-
-    alert(
-      error.response?.data?.message ||
-      "Registration Failed"
-    );
-  }
-};
+    } catch (error) {
+      console.log(error);
+      alert(error.response?.data?.message || "Registration Failed");
+    }
+  };
 
   return (
     <div className="auth-container">
-
       <h2>Register</h2>
 
-      <form
-      className="auth-form"
-
-      onSubmit={handleSubmit}>
-
+      <form className="auth-form" onSubmit={handleSubmit}>
         <input
           type="text"
           name="name"
           placeholder="Enter Name"
           onChange={handleChange}
+          required
         />
 
         <input
@@ -56,6 +47,7 @@ const Register = () => {
           name="email"
           placeholder="Enter Email"
           onChange={handleChange}
+          required
         />
 
         <input
@@ -63,10 +55,10 @@ const Register = () => {
           name="password"
           placeholder="Enter Password"
           onChange={handleChange}
+          required
         />
 
         <button type="submit">Register</button>
-
       </form>
     </div>
   );

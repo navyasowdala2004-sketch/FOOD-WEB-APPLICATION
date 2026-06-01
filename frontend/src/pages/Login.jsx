@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { loginUser } from "../services/authService";
-
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -16,40 +17,34 @@ const Login = () => {
     });
   };
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  try {
-    const res = await loginUser(formData);
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        formData
+      );
 
-    localStorage.setItem(
-      "token",
-      res.data.token
-    );
+      localStorage.setItem("token", res.data.token);
 
-    alert("Login Success");
+      alert("Login Success");
 
-  } catch (error) {
-    console.log(error);
+      // update navbar instantly
+      window.dispatchEvent(new Event("authChange"));
 
-    alert(
-      error.response?.data?.message ||
-      "Login Failed"
-    );
-  }
-};
+      // redirect
+      navigate("/");
+
+    } catch (error) {
+      console.log(error);
+      alert("Login Failed");
+    }
+  };
 
   return (
     <div className="auth-container">
-      <form 
-      className="auth-form"
-      onSubmit={handleSubmit}
-    
-    
-      
-
-
->
+      <form className="auth-form" onSubmit={handleSubmit}>
         <input
           type="email"
           name="email"
@@ -69,7 +64,6 @@ const Login = () => {
         />
 
         <button type="submit">Login</button>
-
       </form>
     </div>
   );

@@ -7,13 +7,9 @@ import AppRoutes from "./routes/AppRoutes";
 function App() {
   return (
     <BrowserRouter>
-
       <Navbar />
-
       <AppRoutes />
-
       <Footer />
-
     </BrowserRouter>
   );
 }
