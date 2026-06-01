@@ -10,7 +10,6 @@ function Menu() {
     <div className="menu-container">
       <h1 className="menu-title">Food Menu</h1>
 
-      {/* Search Box */}
       <div className="search-box">
         <input
           type="text"

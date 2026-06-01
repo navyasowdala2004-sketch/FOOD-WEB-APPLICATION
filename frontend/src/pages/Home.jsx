@@ -4,8 +4,20 @@ import FoodCard from "../components/FoodCard";
 import { FoodContext } from "../context/FoodContext";
 
 function Home() {
-  const { searchTerm, setSearchTerm, filteredFoods } =
-    useContext(FoodContext);
+  const {
+    searchTerm,
+    setSearchTerm,
+    filteredFoods,
+  } = useContext(FoodContext);
+
+  // Show only 4 foods when search is empty
+  const displayFoods =
+    searchTerm.trim() === ""
+      ? filteredFoods.slice(0, 4)
+      : filteredFoods;
+
+      console.log("Total:", filteredFoods.length);
+      console.log("Display:", displayFoods.length);
 
   return (
     <>
@@ -27,13 +39,15 @@ function Home() {
       </div>
 
       <section className="foods">
-        <p>Searching for: {searchTerm}</p>
         <h2>Popular Foods</h2>
 
         <div className="food-container">
-          {filteredFoods.length > 0 ? (
-            filteredFoods.map((food) => (
-              <FoodCard key={food._id} food={food} />
+          {displayFoods.length > 0 ? (
+            displayFoods.map((food) => (
+              <FoodCard
+                key={food._id}
+                food={food}
+              />
             ))
           ) : (
             <p>No matching foods found.</p>
