@@ -6,7 +6,7 @@ const foodRoutes = require("./routes/foodRoutes");
 
 app.use(cors({
     origin: [
-      "https://online-food-app-ouzi.vercel.app",
+      "https://online-food-app-beryl.vercel.app",
       "http://localhost:5173",
     ],
     credentials: true
