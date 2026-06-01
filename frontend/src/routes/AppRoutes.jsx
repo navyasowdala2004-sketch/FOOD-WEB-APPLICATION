@@ -17,6 +17,7 @@ import Payment from "../pages/Payment";
 import PaymentSuccess from "../pages/PaymentSuccess";
 import NotFound from "../pages/NotFound";
 import Offers from "../pages/Offers";
+import ProtectedRoute from "./ProtectedRoute";
 
 function AppRoutes()  {
   return (
@@ -26,10 +27,10 @@ function AppRoutes()  {
       <Route path="/register" element={<Register />} />
       <Route path="/menu" element={<Menu />} />
       <Route path="/food/:id" element={<FoodDetails />} />
-      <Route path="/cart" element={<Cart />} />
-      <Route path="/checkout" element={<Checkout />} />
+      <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+      <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
       <Route path="/orders" element={<Orders />} />
-      <Route path="/profile" element={<Profile />} />
+      <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
       <Route path="/admin" element={<AdminDashboard />} />
       <Route path="/add-food" element={<AddFood />} />
       <Route path="/admin/orders"element={<ManageOrders />}/>

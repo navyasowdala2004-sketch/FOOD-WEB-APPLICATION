@@ -4,17 +4,17 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AppRoutes from "./routes/AppRoutes";
 
+import { FoodProvider } from "./context/FoodContext";
+
 function App() {
   return (
-    <BrowserRouter>
-
-      <Navbar />
-
-      <AppRoutes />
-
-      <Footer />
-
-    </BrowserRouter>
+    <FoodProvider>
+      <BrowserRouter>
+        <Navbar />
+        <AppRoutes />
+        <Footer />
+      </BrowserRouter>
+    </FoodProvider>
   );
 }
 

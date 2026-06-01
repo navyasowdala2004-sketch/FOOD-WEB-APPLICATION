@@ -19,7 +19,15 @@ require("dotenv").config();
 const app = express();
 connectDB();
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://online-food-app-weld.vercel.app"
+  ],
+  credentials: true
+}
+
+));
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/foods", foodRoutes);
@@ -29,6 +37,10 @@ app.use("/api/admin", adminRoutes);
 
 app.get("/", (req, res) => {
   res.send("API Running");
+});
+
+app.get("/test", (req, res) => {
+  res.send("Backend Updated");
 });
 
 const PORT = process.env.PORT || 5000;
