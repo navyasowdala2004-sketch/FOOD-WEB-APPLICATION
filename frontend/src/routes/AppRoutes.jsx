@@ -16,6 +16,7 @@ import ManageUsers from "../pages/ManageUsers";
 import Payment from "../pages/Payment";
 import PaymentSuccess from "../pages/PaymentSuccess";
 import NotFound from "../pages/NotFound";
+import Offers from "../pages/Offers";
 
 function AppRoutes()  {
   return (
@@ -36,6 +37,7 @@ function AppRoutes()  {
       <Route path="/payment" element={<Payment />} />
       <Route path="/payment-success" element={<PaymentSuccess />} />
       <Route path="*" element={<NotFound />} />
+      <Route path="/offers" element={<Offers />} />
     </Routes>
   );
 

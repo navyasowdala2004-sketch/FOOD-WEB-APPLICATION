@@ -13,7 +13,7 @@ function Navbar (){
         <Link to="/orders">Orders</Link>
         <Link to="/login">Login</Link>
         <Link to="/register">Register</Link>
-        <Link to="/admin">Admin</Link>
+        
       </div>
     </nav>
   );
