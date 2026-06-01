@@ -1,11 +1,13 @@
+import { useNavigate } from "react-router-dom";
+
 function SearchBar({
   searchTerm = "",
   setSearchTerm = () => {},
 }) {
-  const handleChange = (e) => {
-    if (typeof setSearchTerm === "function") {
-      setSearchTerm(e.target.value);
-    }
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    navigate(`/menu?search=${searchTerm}`);
   };
 
   return (
@@ -14,9 +16,18 @@ function SearchBar({
         type="text"
         placeholder="Search food items..."
         value={searchTerm}
-        onChange={handleChange}
+        onChange={(e) =>
+          setSearchTerm(e.target.value)
+        }
         className="search-input"
       />
+
+      <button
+        onClick={handleSearch}
+        className="search-btn"
+      >
+        Search
+      </button>
     </div>
   );
 }
