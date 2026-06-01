@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { getFoods } from "../services/foodService";
 import FoodCard from "../components/FoodCard";
 
@@ -6,11 +7,19 @@ function Menu() {
   const [foods, setFoods] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [search, setSearch] = useState("");
-  
+  const location = useLocation();
 
-   console.log("Search Value:", search);
-   console.log("Foods:", foods);
+  // Search value coming from Home page
+  const searchParams = new URLSearchParams(
+    location.search
+  );
+
+  const initialSearch =
+    searchParams.get("search") || "";
+
+  // Search box on Menu page
+  const [search, setSearch] =
+    useState(initialSearch);
 
   useEffect(() => {
     fetchFoods();
@@ -19,7 +28,7 @@ function Menu() {
   const fetchFoods = async () => {
     try {
       const res = await getFoods();
-      console.log("API DATA:", res.data);
+
       setFoods(res.data);
     } catch (error) {
       console.log(error);
@@ -28,15 +37,26 @@ function Menu() {
     }
   };
 
-  const filteredFoods = foods.filter((food) => {
-  const name = food.name || "";
-  const category = food.category || "";
+  const filteredFoods = foods.filter(
+    (food) => {
+      const name = food.name || "";
+      const category =
+        food.category || "";
 
-  return (
-    name.toLowerCase().includes(search.toLowerCase()) ||
-    category.toLowerCase().includes(search.toLowerCase())
+      return (
+        name
+          .toLowerCase()
+          .includes(
+            search.toLowerCase()
+          ) ||
+        category
+          .toLowerCase()
+          .includes(
+            search.toLowerCase()
+          )
+      );
+    }
   );
-});
 
   return (
     <div className="menu-container">
@@ -44,30 +64,35 @@ function Menu() {
         Food Menu
       </h1>
 
-      {/* Search Bar */}
+      {/* Search Box */}
       <div className="search-box">
         <input
           type="text"
-          placeholder="Search by food name or category..."
+          placeholder="Search foods..."
           value={search}
           onChange={(e) =>
-            setSearch(e.target.value)
+            setSearch(
+              e.target.value
+            )
           }
         />
       </div>
 
       {loading ? (
         <h2>Loading...</h2>
-      ) : filteredFoods.length === 0 ? (
+      ) : filteredFoods.length ===
+        0 ? (
         <h2>No Foods Found</h2>
       ) : (
         <div className="food-grid">
-          {filteredFoods.map((food) => (
-            <FoodCard
-              key={food._id}
-              food={food}
-            />
-          ))}
+          {filteredFoods.map(
+            (food) => (
+              <FoodCard
+                key={food._id}
+                food={food}
+              />
+            )
+          )}
         </div>
       )}
     </div>

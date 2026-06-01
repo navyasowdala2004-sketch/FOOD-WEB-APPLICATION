@@ -413,3 +413,17 @@ td {
 .offer-card button:hover {
   background: #e64a19;
 }
+.search-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.search-btn {
+  padding: 12px 20px;
+  background: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
