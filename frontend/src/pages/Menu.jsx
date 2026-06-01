@@ -1,30 +1,69 @@
-import { useContext } from "react";
-import { FoodContext } from "../context/FoodContext";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 import FoodCard from "../components/FoodCard";
 
 function Menu() {
-  const { filteredFoods, searchTerm, setSearchTerm } =
-    useContext(FoodContext);
+  const [foods, setFoods] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const location = useLocation();
+
+  const searchParams = new URLSearchParams(
+    location.search
+  );
+
+  const search =
+    searchParams.get("search") || "";
+
+  useEffect(() => {
+    fetchFoods();
+  }, []);
+
+  const fetchFoods = async () => {
+    try {
+      const res = await axios.get(
+        "https://online-food-app-zn4y.onrender.com/api/foods"
+      );
+
+      console.log("Foods:", res.data);
+
+      // If API returns array
+      setFoods(res.data);
+
+      // If API returns { foods: [...] }
+      // setFoods(res.data.foods);
+
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const filteredFoods = foods.filter((food) =>
+    food.name
+      ?.toLowerCase()
+      .includes(search.toLowerCase())
+  );
 
   return (
     <div className="menu-container">
-      <h1 className="menu-title">Food Menu</h1>
+      <h1 className="menu-title">
+        Food Menu
+      </h1>
 
-      <div className="search-box">
-        <input
-          type="text"
-          placeholder="Search foods..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
-
-      {filteredFoods.length === 0 ? (
+      {loading ? (
+        <h2>Loading...</h2>
+      ) : filteredFoods.length === 0 ? (
         <h2>No Foods Found</h2>
       ) : (
         <div className="food-grid">
           {filteredFoods.map((food) => (
-            <FoodCard key={food._id} food={food} />
+            <FoodCard
+              key={food._id || food.id}
+              food={food}
+            />
           ))}
         </div>
       )}

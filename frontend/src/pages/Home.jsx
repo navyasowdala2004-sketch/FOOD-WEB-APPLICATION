@@ -1,67 +1,85 @@
-import { useEffect, useState } from "react";
-import { getFoods } from "../services/foodService";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import SearchBar from "../components/SearchBar";
 import FoodCard from "../components/FoodCard";
-import { useLocation } from "react-router-dom";
-function Menu() {
-  const [foods, setFoods] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-  const [search, setSearch] = useState("");
-  
+const popularFoods = [
+  {
+    id: 1,
+    name: "Cheese Burger",
+    description: "Delicious burger",
+    price: 149,
+    image:
+      "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500",
+  },
+  {
+    id: 2,
+    name: "Veg Pizza",
+    description: "Hot Pizza",
+    price: 249,
+    image:
+      "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500",
+  },
+  {
+    id: 3,
+    name: "Chicken Biryani",
+    description: "Spicy Biryani",
+    price: 299,
+    image:
+      "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=500",
+  },
+];
 
-   console.log("Search Value:", search);
-   console.log("Foods:", foods);
+function Home() {
+  const [searchTerm, setSearchTerm] =
+    useState("");
 
-  useEffect(() => {
-    fetchFoods();
-  }, []);
-
-  const fetchFoods = async () => {
-    try {
-      const res = await getFoods();
-      console.log("API DATA:", res.data);
-      setFoods(res.data);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const filteredFoods = foods.filter((food) => {
-  const name = food.name || "";
-  const category = food.category || "";
-
-  return (
-    name.toLowerCase().includes(search.toLowerCase()) ||
-    category.toLowerCase().includes(search.toLowerCase())
-  );
-});
+  const navigate = useNavigate();
 
   return (
-    <div className="menu-container">
-      <h1 className="menu-title">
-        Food Menu
-      </h1>
+    <>
+      <div
+        className="hero"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200')",
+        }}
+      >
+        <div className="overlay">
+          <h1>
+            Delicious Food Delivered To You
+          </h1>
 
-     
+          <SearchBar
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+          />
+        </div>
+      </div>
 
-      {loading ? (
-        <h2>Loading...</h2>
-      ) : filteredFoods.length === 0 ? (
-        <h2>No Foods Found</h2>
-      ) : (
-        <div className="food-grid">
-          {filteredFoods.map((food) => (
+      <section className="foods">
+        <h2>Popular Foods</h2>
+
+        <div className="food-container">
+          {popularFoods.map((food) => (
             <FoodCard
-              key={food._id}
+              key={food.id}
               food={food}
             />
           ))}
         </div>
-      )}
-    </div>
+
+        <button
+          className="view-menu-btn"
+          onClick={() =>
+            navigate("/menu")
+          }
+        >
+          View Full Menu
+        </button>
+      </section>
+    </>
   );
 }
 
-export default Menu;
+export default Home;
