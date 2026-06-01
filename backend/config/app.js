@@ -4,15 +4,7 @@ const app = express();
 
 const foodRoutes = require("./routes/foodRoutes");
 
-app.use(cors({
-    origin: [
-      "https://online-food-app-beryl.vercel.app",
-      "http://localhost:5173",
-    ],
-    credentials: true
-}
-
-));
+app.use(cors());
 app.use(express.json());
 
 // ✅ THIS IS CRITICAL
