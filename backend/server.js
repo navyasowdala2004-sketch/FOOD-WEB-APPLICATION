@@ -39,6 +39,10 @@ app.get("/", (req, res) => {
   res.send("API Running");
 });
 
+app.get("/test", (req, res) => {
+  res.send("Backend Updated");
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

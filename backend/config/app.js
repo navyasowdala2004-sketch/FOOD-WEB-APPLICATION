@@ -21,11 +21,9 @@ app.use(express.json());
 
 // ✅ THIS IS CRITICAL
 app.use("/api/foods", foodRoutes);
-
 app.get("/test", (req, res) => {
-  res.json({
-    message: "new backend code is running"
+  res.send("Backend Updated");
+
   });
-});
 
 module.exports = app;
