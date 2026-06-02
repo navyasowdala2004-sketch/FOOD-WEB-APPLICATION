@@ -22,7 +22,7 @@ connectDB();
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://online-food-app-weld.vercel.app"
+    "https://online-food-app-w5li.vercel.app"
   ],
   credentials: true
 }
