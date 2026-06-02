@@ -22,14 +22,18 @@ const Login = () => {
 
   try {
     const res = await loginUser(formData);
-
     localStorage.setItem("token", res.data.token);
 
-    // Save logged in user email
-    localStorage.setItem(
-      "currentUser",
-      formData.email
-    );
+localStorage.setItem(
+  "user",
+  JSON.stringify(res.data.user)
+);
+
+localStorage.setItem(
+  "currentUser",
+  formData.email
+);
+   
 
     alert("Login Success");
 
