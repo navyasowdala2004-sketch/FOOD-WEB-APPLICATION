@@ -1,5 +1,6 @@
 import { useCart } from "../context/CartContext";
 import { Link } from "react-router-dom";
+
 function Cart() {
   const {
     cartItems,
@@ -24,12 +25,13 @@ function Cart() {
         <>
           {cartItems.map((item) => (
             <div
-              key={item._id}
+              key={item._id || item.id}
               className="cart-item"
             >
               <img
                 src={item.image}
                 alt={item.name}
+                width="120"
               />
 
               <div>
@@ -40,7 +42,9 @@ function Cart() {
                 <div className="qty-box">
                   <button
                     onClick={() =>
-                      decreaseQuantity(item._id)
+                      decreaseQuantity(
+                        item._id || item.id
+                      )
                     }
                   >
                     -
@@ -52,7 +56,9 @@ function Cart() {
 
                   <button
                     onClick={() =>
-                      increaseQuantity(item._id)
+                      increaseQuantity(
+                        item._id || item.id
+                      )
                     }
                   >
                     +
@@ -62,7 +68,9 @@ function Cart() {
                 <button
                   className="remove-btn"
                   onClick={() =>
-                    removeFromCart(item._id)
+                    removeFromCart(
+                      item._id || item.id
+                    )
                   }
                 >
                   Remove
@@ -70,13 +78,14 @@ function Cart() {
               </div>
             </div>
           ))}
-          <Link to="/checkout">
-  <button>
-    Proceed To Checkout
-  </button>
-</Link>
 
           <h2>Total: ₹{total}</h2>
+
+          <Link to="/checkout">
+            <button className="checkout-btn">
+              Proceed To Checkout
+            </button>
+          </Link>
         </>
       )}
     </div>

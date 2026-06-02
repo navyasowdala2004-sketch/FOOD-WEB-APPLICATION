@@ -10,16 +10,15 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
-  // Load cart from localStorage
   useEffect(() => {
-    const savedCart = localStorage.getItem("cart");
+    const savedCart =
+      localStorage.getItem("cart");
 
     if (savedCart) {
       setCartItems(JSON.parse(savedCart));
     }
   }, []);
 
-  // Save cart to localStorage
   useEffect(() => {
     localStorage.setItem(
       "cart",
@@ -29,17 +28,25 @@ export const CartProvider = ({ children }) => {
 
   // Add Item
   const addToCart = (food) => {
-    const existingItem = cartItems.find(
-      (item) => item._id === food._id
-    );
+    const itemId =
+      food._id || food.id;
+
+    const existingItem =
+      cartItems.find(
+        (item) =>
+          (item._id || item.id) ===
+          itemId
+      );
 
     if (existingItem) {
       setCartItems(
         cartItems.map((item) =>
-          item._id === food._id
+          (item._id || item.id) ===
+          itemId
             ? {
                 ...item,
-                quantity: item.quantity + 1,
+                quantity:
+                  item.quantity + 1,
               }
             : item
         )
@@ -59,7 +66,8 @@ export const CartProvider = ({ children }) => {
   const removeFromCart = (id) => {
     setCartItems(
       cartItems.filter(
-        (item) => item._id !== id
+        (item) =>
+          (item._id || item.id) !== id
       )
     );
   };
@@ -68,10 +76,11 @@ export const CartProvider = ({ children }) => {
   const increaseQuantity = (id) => {
     setCartItems(
       cartItems.map((item) =>
-        item._id === id
+        (item._id || item.id) === id
           ? {
               ...item,
-              quantity: item.quantity + 1,
+              quantity:
+                item.quantity + 1,
             }
           : item
       )
@@ -83,10 +92,11 @@ export const CartProvider = ({ children }) => {
     setCartItems(
       cartItems
         .map((item) =>
-          item._id === id
+          (item._id || item.id) === id
             ? {
                 ...item,
-                quantity: item.quantity - 1,
+                quantity:
+                  item.quantity - 1,
               }
             : item
         )
@@ -96,17 +106,18 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  // Clear Cart
   const clearCart = () => {
     setCartItems([]);
   };
 
-  // Total Price
-  const totalPrice = cartItems.reduce(
-    (total, item) =>
-      total + item.price * item.quantity,
-    0
-  );
+  const totalPrice =
+    cartItems.reduce(
+      (total, item) =>
+        total +
+        item.price *
+          item.quantity,
+      0
+    );
 
   return (
     <CartContext.Provider
