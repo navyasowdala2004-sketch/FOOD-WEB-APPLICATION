@@ -252,3 +252,23 @@
 .search-btn:hover {
   background: #e64a19;
 }
+.coupon-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.coupon-list button {
+  padding: 10px;
+  border: none;
+  background: #ff5722;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.coupon-list button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

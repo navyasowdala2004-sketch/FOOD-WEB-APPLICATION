@@ -1,24 +1,30 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import SearchBar from "../components/SearchBar";
 import FoodCard from "../components/FoodCard";
 
 function Menu() {
   const [foods, setFoods] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] =
+    useState("");
 
   const location = useLocation();
-
-  const searchParams = new URLSearchParams(
-    location.search
-  );
-
-  const search =
-    searchParams.get("search") || "";
 
   useEffect(() => {
     fetchFoods();
   }, []);
+
+  useEffect(() => {
+    const params =
+      new URLSearchParams(location.search);
+
+    const search =
+      params.get("search") || "";
+
+    setSearchTerm(search);
+  }, [location.search]);
 
   const fetchFoods = async () => {
     try {
@@ -28,12 +34,7 @@ function Menu() {
 
       console.log("Foods:", res.data);
 
-      // If API returns array
       setFoods(res.data);
-
-      // If API returns { foods: [...] }
-      // setFoods(res.data.foods);
-
     } catch (error) {
       console.log(error);
     } finally {
@@ -41,10 +42,13 @@ function Menu() {
     }
   };
 
-  const filteredFoods = foods.filter((food) =>
-    food.name
-      ?.toLowerCase()
-      .includes(search.toLowerCase())
+  const filteredFoods = foods.filter(
+    (food) =>
+      food.name
+        ?.toLowerCase()
+        .includes(
+          searchTerm.toLowerCase()
+        )
   );
 
   return (
@@ -52,6 +56,11 @@ function Menu() {
       <h1 className="menu-title">
         Food Menu
       </h1>
+
+      <SearchBar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
 
       {loading ? (
         <h2>Loading...</h2>
