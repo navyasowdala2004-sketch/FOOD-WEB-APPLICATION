@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
 import FoodCard from "../components/FoodCard";
-import Navbar from "../components/Navbar";
 
 const popularFoods = [
   {
@@ -30,21 +29,7 @@ const popularFoods = [
       "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=500",
   },
 ];
-<section className="offers">
-  <h2>Today's Offers</h2>
 
-  <div className="offer-card">
-    🎉 Use FOOD10 and get 10% OFF
-  </div>
-
-  <div className="offer-card">
-    🍕 Use FOOD20 and get 20% OFF
-  </div>
-
-  <div className="offer-card">
-    🎁 First Order? Use FIRST50
-  </div>
-</section>
 function Home() {
   const [searchTerm, setSearchTerm] =
     useState("");
@@ -53,6 +38,7 @@ function Home() {
 
   return (
     <>
+      {/* Hero Section */}
       <div
         className="hero"
         style={{
@@ -72,6 +58,24 @@ function Home() {
         </div>
       </div>
 
+      {/* Offers Section */}
+      <section className="offers">
+        <h2>Today's Offers</h2>
+
+        <div className="offer-card">
+          🎉 Use FOOD10 and get 10% OFF
+        </div>
+
+        <div className="offer-card">
+          🍕 Use FOOD20 and get 20% OFF
+        </div>
+
+        <div className="offer-card">
+          🎁 First Order? Use FIRST50
+        </div>
+      </section>
+
+      {/* Popular Foods */}
       <section className="foods">
         <h2>Popular Foods</h2>
 

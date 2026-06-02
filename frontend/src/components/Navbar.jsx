@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const checkLogin = () => {
     const token = localStorage.getItem("token");
@@ -28,31 +30,104 @@ function Navbar() {
     navigate("/login");
   };
 
+  const isActive = (path) => {
+    return location.pathname === path || location.pathname === `/home` && path === "/home";
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <nav className="navbar">
-      <h2>🍔 FoodHub</h2>
+      <Link to="/home" className="navbar-brand">
+        <h2>🍔 FoodHub</h2>
+      </Link>
 
-      <div className="nav-links">
-        <Link to="/home">Home</Link>
-        <Link to="/menu">Menu</Link>
-        <Link to="/offers">Offers</Link>
-        <Link to="/cart">Cart</Link>
-         <Link to="/orders">Orders</Link>
+      <button className="hamburger" onClick={toggleMenu}>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
+        <Link 
+          to="/home" 
+          className={`nav-link ${isActive("/home") ? 'active' : ''}`}
+          onClick={closeMenu}
+        >
+          Home
+        </Link>
+        <Link 
+          to="/menu" 
+          className={`nav-link ${isActive("/menu") ? 'active' : ''}`}
+          onClick={closeMenu}
+        >
+          Menu
+        </Link>
+        <Link 
+          to="/offers" 
+          className={`nav-link ${isActive("/offers") ? 'active' : ''}`}
+          onClick={closeMenu}
+        >
+          Offers
+        </Link>
+        <Link 
+          to="/cart" 
+          className={`nav-link ${isActive("/cart") ? 'active' : ''}`}
+          onClick={closeMenu}
+        >
+          🛒 Cart
+        </Link>
+        <Link 
+          to="/orders" 
+          className={`nav-link ${isActive("/orders") ? 'active' : ''}`}
+          onClick={closeMenu}
+        >
+          📦 Orders
+        </Link>
 
         {/* AUTH SECTION */}
-        {!isLoggedIn ? (
-          <>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
-          </>
-        ) : (
-          <>
-            <Link to="/profile">Profile</Link>
-            <button className="logout-btn" onClick={handleLogout}>
-              Logout
-            </button>
-          </>
-        )}
+        <div className="auth-section">
+          {!isLoggedIn ? (
+            <>
+              <Link 
+                to="/login" 
+                className="nav-link"
+                onClick={closeMenu}
+              >
+                Login
+              </Link>
+              <Link 
+                to="/register" 
+                className="nav-link register-link"
+                onClick={closeMenu}
+              >
+                Register
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link 
+                to="/profile" 
+                className={`nav-link ${isActive("/profile") ? 'active' : ''}`}
+                onClick={closeMenu}
+              >
+                Profile
+              </Link>
+              <button className="logout-btn" onClick={() => {
+                handleLogout();
+                closeMenu();
+              }}>
+                Logout
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </nav>
   );

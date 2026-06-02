@@ -18,14 +18,24 @@
 }
 
 .hero {
-  position: relative;
+  height: 80vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.overlay {
+  background: rgba(0,0,0,0.5);
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+}
 
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
+.overlay h1 {
+  color: white;
+  margin-bottom: 20px;
+}
 
   .base {
     width: 170px;
@@ -54,7 +64,7 @@
     transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
       scale(0.8);
   }
-}
+
 
 #center {
   display: flex;
@@ -271,4 +281,24 @@
 .coupon-list button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+.offers {
+  padding: 40px;
+  text-align: center;
+  background: #fff3e0;
+}
+
+.offers h2 {
+  margin-bottom: 20px;
+  color: #ff5722;
+}
+
+.offer-card {
+  background: white;
+  margin: 10px auto;
+  padding: 15px;
+  width: 300px;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
