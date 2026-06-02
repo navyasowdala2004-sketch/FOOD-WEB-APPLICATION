@@ -31,6 +31,8 @@ const popularFoods = [
 ];
 
 function Home() {
+   console.log("Home page loaded");
+
   const [searchTerm, setSearchTerm] =
     useState("");
 

@@ -25,14 +25,26 @@ const Login = () => {
 
     localStorage.setItem("token", res.data.token);
 
+    // Save logged in user email
+    localStorage.setItem(
+      "currentUser",
+      formData.email
+    );
+
     alert("Login Success");
 
-    window.dispatchEvent(new Event("authChange"));
+    window.dispatchEvent(
+      new Event("authChange")
+    );
 
-    navigate("/");
+    navigate("/home");
   } catch (error) {
     console.log(error);
-    alert(error.response?.data?.message || "Login Failed");
+
+    alert(
+      error.response?.data?.message ||
+        "Login Failed"
+    );
   }
 };
 

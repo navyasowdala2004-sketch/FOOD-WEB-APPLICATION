@@ -5,14 +5,24 @@ function Orders() {
     useState([]);
 
   useEffect(() => {
-    const savedOrders =
+    const currentUser =
+      localStorage.getItem(
+        "currentUser"
+      );
+
+    const allOrders =
       JSON.parse(
-        localStorage.getItem(
-          "orders"
-        )
+        localStorage.getItem("orders")
       ) || [];
 
-    setOrders(savedOrders);
+    const userOrders =
+      allOrders.filter(
+        (order) =>
+          order.userEmail ===
+          currentUser
+      );
+
+    setOrders(userOrders);
   }, []);
 
   return (
@@ -33,24 +43,40 @@ function Orders() {
               </h3>
 
               <p>
-                Total: ₹
-                {order.total}
+                Total: ₹{order.total}
+              </p>
+
+              <p>
+                Coupon:
+                {" "}
+                {order.coupon ||
+                  "No Coupon"}
+              </p>
+
+              <p>
+                Discount:
+                {" "}
+                ₹{order.discount}
               </p>
 
               <p>
                 Payment Method:
                 {" "}
-                {order.paymentMethod}
+                {
+                  order.paymentMethod
+                }
               </p>
 
               <p>
                 Payment Status:
                 {" "}
-                {order.paymentStatus}
+                {
+                  order.paymentStatus
+                }
               </p>
 
               <p>
-                Order Date:
+                Date:
                 {" "}
                 {order.date}
               </p>

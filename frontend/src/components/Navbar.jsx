@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 function Navbar() {
+   console.log("Home page loaded");
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -22,14 +24,19 @@ function Navbar() {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
+  localStorage.removeItem("token");
+  localStorage.removeItem(
+    "currentUser"
+  );
 
-    window.dispatchEvent(new Event("authChange"));
+  setIsLoggedIn(false);
 
-    navigate("/login");
-  };
+  window.dispatchEvent(
+    new Event("authChange")
+  );
 
+  navigate("/login");
+};
   const isActive = (path) => {
     return location.pathname === path || location.pathname === `/home` && path === "/home";
   };

@@ -51,29 +51,41 @@ function Checkout() {
   const finalAmount =
     totalPrice - discount;
 
-  const handlePlaceOrder = () => {
-    const newOrder = {
-      items: cartItems,
-      total: finalAmount,
-      paymentMethod,
-      paymentStatus: "Pending",
-      coupon: appliedCoupon,
-      discount,
-      date: new Date().toLocaleString(),
-    };
+ const handlePlaceOrder = () => {
+  const currentUser =
+    localStorage.getItem("currentUser");
 
-    const oldOrders =
-      JSON.parse(
-        localStorage.getItem("orders")
-      ) || [];
+  if (!currentUser) {
+    alert("Please login first");
+    navigate("/login");
+    return;
+  }
 
-    localStorage.setItem(
-      "orders",
-      JSON.stringify([
-        ...oldOrders,
-        newOrder,
-      ])
-    );
+  const newOrder = {
+    userEmail: currentUser,
+    items: cartItems,
+    total: finalAmount,
+    paymentMethod,
+    paymentStatus: "Pending",
+    coupon: appliedCoupon,
+    discount,
+    date: new Date().toLocaleString(),
+  };
+
+  const oldOrders =
+    JSON.parse(
+      localStorage.getItem("orders")
+    ) || [];
+
+  localStorage.setItem(
+    "orders",
+    JSON.stringify([
+      ...oldOrders,
+      newOrder,
+    ])
+  );
+
+  
 
     alert("Order Placed Successfully");
 
