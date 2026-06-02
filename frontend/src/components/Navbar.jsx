@@ -37,6 +37,7 @@ function Navbar() {
         <Link to="/menu">Menu</Link>
         <Link to="/offers">Offers</Link>
         <Link to="/cart">Cart</Link>
+         <Link to="/orders">Orders</Link>
 
         {/* AUTH SECTION */}
         {!isLoggedIn ? (
