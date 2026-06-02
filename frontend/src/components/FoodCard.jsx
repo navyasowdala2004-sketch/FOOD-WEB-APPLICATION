@@ -23,7 +23,10 @@ function FoodCard({ food }) {
 
         
         <button
-          onClick={() => addToCart(food)}
+          onClick={() => {
+  console.log("Food Added:", food);
+  addToCart(food);
+}}
         >
           Add To Cart
         </button>
