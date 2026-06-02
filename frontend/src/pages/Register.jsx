@@ -24,8 +24,11 @@ const Register = () => {
       alert("Registration Successful");
 
     } catch (error) {
-      console.log(error);
-      alert(error.response?.data?.message || "Registration Failed");
+       console.log("FULL ERROR:", error);
+       console.log("RESPONSE:", error.response);
+       console.log("DATA:", error.response?.data);
+
+  alert(error.response?.data?.message || error.message);
     }
   };
 
