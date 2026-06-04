@@ -64,16 +64,18 @@ function Home() {
       <section className="offers">
         <h2>Today's Offers</h2>
 
-        <div className="offer-card">
-          🎉 Use FOOD10 and get 10% OFF
-        </div>
+        <div className="offer-list">
+          <div className="offer-card">
+            🎉 Use FOOD10 and get 10% OFF
+          </div>
 
-        <div className="offer-card">
-          🍕 Use FOOD20 and get 20% OFF
-        </div>
+          <div className="offer-card">
+            🍕 Use FOOD20 and get 20% OFF
+          </div>
 
-        <div className="offer-card">
-          🎁 First Order? Use FIRST50
+          <div className="offer-card">
+            🎁 First Order? Use FIRST50
+          </div>
         </div>
       </section>
 
