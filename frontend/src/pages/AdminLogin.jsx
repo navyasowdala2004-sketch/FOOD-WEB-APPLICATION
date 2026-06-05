@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../services/authService";
 
-const ADMIN_ACCESS_CODE = import.meta.env.VITE_ADMIN_LOGIN_CODE=ADMIN123;
+const ADMIN_ACCESS_CODE = import.meta.env.VITE_ADMIN_LOGIN_CODE || "admin123";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
