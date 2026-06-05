@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginAdmin } from "../services/authService";
+import { loginUser } from "../services/authService";
+
+const ADMIN_ACCESS_CODE = import.meta.env.VITE_ADMIN_LOGIN_CODE || "admin123";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -17,8 +19,18 @@ const AdminLogin = () => {
     e.preventDefault();
 
     try {
-      const res = await loginAdmin(formData);
+      if (formData.adminCode !== ADMIN_ACCESS_CODE) {
+        alert("Invalid admin access code.");
+        return;
+      }
+
+      const res = await loginUser(formData);
       const userData = res.data.user;
+
+      if (userData.role !== "admin") {
+        alert("This account is not an admin.");
+        return;
+      }
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(userData));
