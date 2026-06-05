@@ -12,6 +12,7 @@ import Orders from "../pages/Orders";
 import Profile from "../pages/Profile";
 import AdminDashboard from "../pages/AdminDashboard";
 import AdminLogin from "../pages/AdminLogin";
+import AdminRegister from "../pages/AdminRegister";
 import AddFood from "../pages/AddFood";
 import ManageOrders from "../pages/ManageOrders";
 import ManageUsers from "../pages/ManageUsers";
@@ -36,6 +37,7 @@ function AppRoutes()  {
       <Route path="/orders" element={<Orders />} />
       <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
       <Route path="/admin-login" element={<AdminLogin />} />
+      <Route path="/admin-register" element={<AdminRegister />} />
       <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
       <Route path="/admin/add-food" element={<AdminRoute><AddFood /></AdminRoute>} />
       <Route path="/admin/orders" element={<AdminRoute><ManageOrders /></AdminRoute>} />

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../services/authService";
 
 const AdminLogin = () => {
@@ -83,7 +83,10 @@ const AdminLogin = () => {
       </form>
       <div className="auth-switch">
         <p>
-          Regular user? <a href="/login">Login here</a>
+          Regular user? <Link to="/login">Login here</Link>
+        </p>
+        <p>
+          Need an admin account? <Link to="/admin-register">Register here</Link>
         </p>
       </div>
     </div>
