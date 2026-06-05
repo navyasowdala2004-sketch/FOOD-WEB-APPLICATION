@@ -7,12 +7,15 @@ const authMiddleware = require("../middleware/authMiddleware");
 
 const {
   registerUser,
-    loginUser
-
+  loginUser,
+  registerAdmin,
+  loginAdmin,
 } = require("../controllers/authController");
 
 router.post("/register", registerUser);
+router.post("/register-admin", registerAdmin);
 router.post("/login", loginUser);
+router.post("/login-admin", loginAdmin);
 
 router.get(
   "/profile",

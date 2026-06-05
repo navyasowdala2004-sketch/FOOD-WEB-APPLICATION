@@ -29,6 +29,8 @@ function Profile() {
         <h3>Email: {user.email}</h3>
 
         <h3>User ID: {user.id}</h3>
+
+        <h3>Role: {user.role || "user"}</h3>
       </div>
     </div>
   );

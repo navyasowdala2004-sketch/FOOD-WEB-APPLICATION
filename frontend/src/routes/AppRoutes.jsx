@@ -11,6 +11,7 @@ import Checkout from "../pages/Checkout";
 import Orders from "../pages/Orders";
 import Profile from "../pages/Profile";
 import AdminDashboard from "../pages/AdminDashboard";
+import AdminLogin from "../pages/AdminLogin";
 import AddFood from "../pages/AddFood";
 import ManageOrders from "../pages/ManageOrders";
 import ManageUsers from "../pages/ManageUsers";
@@ -19,6 +20,7 @@ import PaymentSuccess from "../pages/PaymentSuccess";
 import NotFound from "../pages/NotFound";
 import Offers from "../pages/Offers";
 import ProtectedRoute from "./ProtectedRoute";
+import AdminRoute from "./AdminRoute";
 
 function AppRoutes()  {
   return (
@@ -33,14 +35,15 @@ function AppRoutes()  {
       <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
       <Route path="/orders" element={<Orders />} />
       <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-      <Route path="/admin" element={<AdminDashboard />} />
-      <Route path="/add-food" element={<AddFood />} />
-      <Route path="/admin/orders"element={<ManageOrders />}/>
-      <Route path="/admin/users"element={<ManageUsers />}/>
+      <Route path="/admin-login" element={<AdminLogin />} />
+      <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+      <Route path="/admin/add-food" element={<AdminRoute><AddFood /></AdminRoute>} />
+      <Route path="/admin/orders" element={<AdminRoute><ManageOrders /></AdminRoute>} />
+      <Route path="/admin/users" element={<AdminRoute><ManageUsers /></AdminRoute>} />
       <Route path="/payment" element={<Payment />} />
       <Route path="/payment-success" element={<PaymentSuccess />} />
-      <Route path="*" element={<NotFound />} />
       <Route path="/offers" element={<Offers />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 

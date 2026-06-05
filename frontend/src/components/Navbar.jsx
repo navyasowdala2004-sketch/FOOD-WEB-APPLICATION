@@ -5,13 +5,16 @@ function Navbar() {
    console.log("Home page loaded");
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
   const checkLogin = () => {
     const token = localStorage.getItem("token");
+    const storedUser = localStorage.getItem("user");
     setIsLoggedIn(!!token);
+    setIsAdmin(storedUser ? JSON.parse(storedUser).role === "admin" : false);
   };
 
   useEffect(() => {
@@ -98,6 +101,16 @@ function Navbar() {
         >
           📦 Orders
         </Link>
+
+        {isAdmin && (
+          <Link
+            to="/admin"
+            className={`nav-link ${isActive("/admin") ? 'active' : ''}`}
+            onClick={closeMenu}
+          >
+            Admin
+          </Link>
+        )}
 
         {/* AUTH SECTION */}
         <div className="auth-section">

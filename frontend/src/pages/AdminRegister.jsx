@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../services/authService";
+import { registerAdmin } from "../services/authService";
 
-const Login = () => {
+const AdminRegister = () => {
   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
   });
@@ -21,61 +21,56 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await loginUser(formData);
-      const userData = res.data.user;
-
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(userData));
-      localStorage.setItem("currentUser", userData.email);
-
-      alert("Login Success");
-
-      window.dispatchEvent(new Event("authChange"));
-
-      if (userData.role === "admin") {
-        navigate("/admin");
-      } else {
-        navigate("/home");
-      }
+      await registerAdmin(formData);
+      alert("Admin registration successful. Please login.");
+      navigate("/admin-login");
     } catch (error) {
       console.log(error);
-
       alert(
         error.response?.data?.message ||
           error.message ||
-          "Login Failed"
+          "Admin registration failed"
       );
     }
   };
 
   return (
     <div className="auth-container">
+      <h2>Register Admin</h2>
       <form className="auth-form" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Admin Name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
         <input
           type="email"
           name="email"
-          placeholder="Enter Email"
+          placeholder="Admin Email"
           value={formData.email}
           onChange={handleChange}
           required
         />
-
         <input
           type="password"
           name="password"
-          placeholder="Enter Password"
+          placeholder="Password"
           value={formData.password}
           onChange={handleChange}
           required
         />
-
-        <button type="submit">Login</button>
+        <button type="submit">Create Admin Account</button>
       </form>
       <div className="auth-switch">
-        <p>Admin? <a href="/admin-login">Login here</a></p>
+        <p>
+          Already have an admin account? <a href="/admin-login">Login here</a>
+        </p>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default AdminRegister;
