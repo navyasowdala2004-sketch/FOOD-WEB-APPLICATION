@@ -49,7 +49,7 @@ const registerUser = async (req, res) => {
 // LOGIN USER
 const loginUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, adminCode } = req.body;
 
     const user = await User.findOne({ email });
 
@@ -68,6 +68,14 @@ const loginUser = async (req, res) => {
       return res.status(400).json({
         message: "Invalid Password",
       });
+    }
+
+    if (user.role === "admin") {
+      if (!adminCode || adminCode.toLowerCase() !== ADMIN_LOGIN_CODE.toLowerCase()) {
+        return res.status(401).json({
+          message: "Invalid admin access code.",
+        });
+      }
     }
 
     const token = jwt.sign(

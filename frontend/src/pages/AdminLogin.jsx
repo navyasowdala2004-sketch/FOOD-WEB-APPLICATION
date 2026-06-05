@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../services/authService";
 
-const ADMIN_ACCESS_CODE = import.meta.env.VITE_ADMIN_LOGIN_CODE || "admin123";
+const ADMIN_ACCESS_CODE = import.meta.env.VITE_ADMIN_LOGIN_CODE=ADMIN123;
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -19,7 +19,12 @@ const AdminLogin = () => {
     e.preventDefault();
 
     try {
-      if (formData.adminCode !== ADMIN_ACCESS_CODE) {
+      if (!formData.adminCode) {
+        alert("Please enter the admin access code.");
+        return;
+      }
+
+      if (ADMIN_ACCESS_CODE && formData.adminCode !== ADMIN_ACCESS_CODE) {
         alert("Invalid admin access code.");
         return;
       }
