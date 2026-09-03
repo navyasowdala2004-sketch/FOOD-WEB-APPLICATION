@@ -29,3 +29,11 @@ export const loginUser = (userData) => {
   );
 };
 
+// Login Admin
+export const loginAdmin = (userData) => {
+  return axios.post(
+    `${API}/auth/login-admin`,
+    userData
+  );
+};
+

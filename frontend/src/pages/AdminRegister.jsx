@@ -8,6 +8,7 @@ const AdminRegister = () => {
     name: "",
     email: "",
     password: "",
+    adminCode: "",
   });
 
   const handleChange = (e) => {
@@ -21,7 +22,16 @@ const AdminRegister = () => {
     e.preventDefault();
 
     try {
-      await registerAdmin(formData);
+      const adminCode = formData.adminCode?.trim();
+      if (!adminCode) {
+        alert("Please enter the admin access code.");
+        return;
+      }
+
+      await registerAdmin({
+        ...formData,
+        adminCode,
+      });
       alert("Admin registration successful. Please login.");
       navigate("/admin-login");
     } catch (error) {
@@ -59,6 +69,14 @@ const AdminRegister = () => {
           name="password"
           placeholder="Password"
           value={formData.password}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="adminCode"
+          placeholder="Admin Access Code"
+          value={formData.adminCode}
           onChange={handleChange}
           required
         />

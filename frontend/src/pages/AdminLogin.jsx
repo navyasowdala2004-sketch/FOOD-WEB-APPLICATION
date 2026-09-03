@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { loginUser } from "../services/authService";
+import { loginAdmin } from "../services/authService";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const AdminLogin = () => {
         return;
       }
 
-      const res = await loginUser({
+      const res = await loginAdmin({
         ...formData,
         adminCode,
       });
