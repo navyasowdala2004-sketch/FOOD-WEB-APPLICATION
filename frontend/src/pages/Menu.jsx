@@ -28,9 +28,11 @@ function Menu() {
 
   const fetchFoods = async () => {
     try {
-      const res = await axios.get(
-        "https://online-food-app-zn4y.onrender.com/api/foods"
-      );
+      const API = import.meta.env.DEV && typeof window !== "undefined" && window.location.hostname.includes("localhost")
+        ? "http://localhost:5000/api"
+        : import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+
+      const res = await axios.get(`${API}/foods`);
 
       console.log("Foods:", res.data);
 

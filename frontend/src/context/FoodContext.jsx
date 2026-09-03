@@ -1,6 +1,10 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
+const API = import.meta.env.DEV && typeof window !== "undefined" && window.location.hostname.includes("localhost")
+  ? "http://localhost:5000/api"
+  : import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+
 // create context
 export const FoodContext = createContext();
 
@@ -12,7 +16,7 @@ export const FoodProvider = ({ children }) => {
   // fetch foods once
   const fetchFoods = async () => {
     try {
-      const res = await axios.get("https://online-food-app-zn4y.onrender.com/api/foods");
+      const res = await axios.get(`${API}/foods`);
       setFoods(res.data);
     } catch (error) {
       console.log("Food fetch error:", error);
