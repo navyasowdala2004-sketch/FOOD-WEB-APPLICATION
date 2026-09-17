@@ -29,4 +29,11 @@ router.get(
 
   }
 );
+
+router.get("/register-admin-test", (req, res) => {
+  res.json({
+    message: "Admin route is working"
+  });
+});
+
 module.exports = router;
