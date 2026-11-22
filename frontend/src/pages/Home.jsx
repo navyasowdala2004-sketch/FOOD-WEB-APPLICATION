@@ -41,13 +41,23 @@ function Home() {
   return (
     <>
       {/* Hero Section */}
-      <div
-        className="hero"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200')",
-        }}
-      >
+     
+<div
+  className="hero"
+  style={{
+    backgroundImage:
+      "url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200')",
+    height: "350px",
+    minHeight: "350px",
+    maxHeight: "350px",
+    width: "100%",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    overflow: "visible",
+  }}
+>
+
         <div className="overlay">
           <h1>
             Delicious Food Delivered To You

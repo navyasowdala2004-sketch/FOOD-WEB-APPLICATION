@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
@@ -7,8 +8,7 @@ import FoodCard from "../components/FoodCard";
 function Menu() {
   const [foods, setFoods] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] =
-    useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const location = useLocation();
 
@@ -17,48 +17,40 @@ function Menu() {
   }, []);
 
   useEffect(() => {
-    const params =
-      new URLSearchParams(location.search);
-
-    const search =
-      params.get("search") || "";
-
-    setSearchTerm(search);
+    const params = new URLSearchParams(location.search);
+    setSearchTerm(params.get("search") || "");
   }, [location.search]);
 
   const fetchFoods = async () => {
     try {
-      const API = import.meta.env.DEV && typeof window !== "undefined" && window.location.hostname.includes("localhost")
-        ? "http://localhost:5000/api"
-        : import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+      const API =
+        import.meta.env.DEV &&
+        window.location.hostname.includes("localhost")
+          ? "http://localhost:5000/api"
+          : import.meta.env.VITE_API_URL ||
+            "http://localhost:5000/api";
 
       const res = await axios.get(`${API}/foods`);
+      const data = res.data;
 
-      console.log("Foods:", res.data);
-
-      setFoods(res.data);
+      setFoods(Array.isArray(data) ? data : data.foods || []);
     } catch (error) {
-      console.log(error);
+      console.error("Food fetching error:", error);
+      setFoods([]);
     } finally {
       setLoading(false);
     }
   };
 
-  const filteredFoods = foods.filter(
-    (food) =>
-      food.name
-        ?.toLowerCase()
-        .includes(
-          searchTerm.toLowerCase()
-        )
+  const filteredFoods = foods.filter((food) =>
+    food.name?.toLowerCase().includes(searchTerm.trim().toLowerCase())
   );
 
   return (
     <div className="menu-container">
-      <h1 className="menu-title">
-        Food Menu
-      </h1>
+      <h1 className="menu-title">Food Menu</h1>
 
+      {/* Search bar stays visible */}
       <SearchBar
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
@@ -71,10 +63,22 @@ function Menu() {
       ) : (
         <div className="food-grid">
           {filteredFoods.map((food) => (
-            <FoodCard
+            <div
+              className="menu-food-wrapper"
               key={food._id || food.id}
-              food={food}
-            />
+              style={{
+                width: "220px",
+                maxWidth: "100%",
+                minWidth: 0,
+                overflow: "hidden",
+                boxSizing: "border-box",
+              }}
+            >
+              <FoodCard
+                food={food}
+                className="menu-food-card"
+              />
+            </div>
           ))}
         </div>
       )}
