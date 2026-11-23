@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
@@ -31,37 +32,31 @@ const popularFoods = [
 ];
 
 function Home() {
-   console.log("Home page loaded");
+  console.log("Home page loaded");
 
-  const [searchTerm, setSearchTerm] =
-    useState("");
-
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
   return (
     <>
       {/* Hero Section */}
-     
-<div
-  className="hero"
-  style={{
-    backgroundImage:
-      "url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200')",
-    height: "350px",
-    minHeight: "350px",
-    maxHeight: "350px",
-    width: "100%",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    overflow: "visible",
-  }}
->
-
+      <div
+        className="hero"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200')",
+          height: "350px",
+          minHeight: "350px",
+          maxHeight: "350px",
+          width: "100%",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          overflow: "visible",
+        }}
+      >
         <div className="overlay">
-          <h1>
-            Delicious Food Delivered To You
-          </h1>
+          <h1>Delicious Food Delivered To You</h1>
 
           <SearchBar
             searchTerm={searchTerm}
@@ -93,20 +88,19 @@ function Home() {
       <section className="foods">
         <h2>Popular Foods</h2>
 
-        <div className="food-container">
+        <div className="food-container home-food-container">
           {popularFoods.map((food) => (
             <FoodCard
               key={food.id}
               food={food}
+              className="home-food-card"
             />
           ))}
         </div>
 
         <button
           className="view-menu-btn"
-          onClick={() =>
-            navigate("/menu")
-          }
+          onClick={() => navigate("/menu")}
         >
           View Full Menu
         </button>

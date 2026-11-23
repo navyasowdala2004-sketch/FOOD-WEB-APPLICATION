@@ -955,3 +955,101 @@ td {
     flex-wrap: wrap;
   }
 }
+
+
+/* HOME PAGE - POPULAR FOOD CARD ALIGNMENT FIX ONLY */
+
+.foods {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.foods .food-container {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 25px !important;
+  width: 100%;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.foods .food-container > .food-card {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 12px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Food image wrapper */
+.foods .food-container > .food-card > div:first-child {
+  width: 100%;
+  height: 190px;
+  min-height: 190px;
+  overflow: hidden;
+}
+
+/* Food image */
+.foods .food-container > .food-card > div:first-child img {
+  display: block;
+  width: 100% !important;
+  height: 190px !important;
+  max-width: 100% !important;
+  object-fit: cover !important;
+  object-position: center;
+  position: static !important;
+  transform: none !important;
+  margin: 0 !important;
+}
+
+/* Food information */
+.foods .food-container > .food-card > .food-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+  padding: 15px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.foods .food-container .food-info h3 {
+  margin: 5px 0;
+}
+
+.foods .food-container .food-info p {
+  margin: 5px 0;
+}
+
+.foods .food-container .food-info h4 {
+  margin: 8px 0;
+}
+
+.foods .food-container .food-info button {
+  margin-top: 10px;
+}
+
+/* Tablet */
+@media (max-width: 800px) {
+  .foods .food-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 520px) {
+  .foods .food-container {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
